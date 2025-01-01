@@ -1,67 +1,53 @@
-const words = [
-    "apple", "banana", "cherry", "date", "elderberry",
-    "fig", "grape", "honeydew", "kiwi", "lemon",
-    "mango", "nectarine", "orange", "papaya", "quince",
-    "raspberry", "strawberry", "tangerine", "watermelon",
-    "pear", "plum", "peach"
-];
+// Existing code for speed typing challenge
 
-let currentWord = "";
+let words = ["example", "test", "challenge", "speed", "typing", "mango", "tornado", "volume", "vacuum", "tsunami", "natural", "paranormal", "corn"]; // Add your word list here
+let currentWord;
 let score = 0;
 let timeLeft = 30;
 let timer;
 
-const wordDisplay = document.getElementById('word-display');
-const wordInput = document.getElementById('word-input');
-const startButton = document.getElementById('start-button');
-const scoreDisplay = document.getElementById('score');
-const timerDisplay = document.getElementById('timer');
-const messageDisplay = document.getElementById('message');
+document.getElementById('start-button').addEventListener('click', startGame);
 
 function startGame() {
     score = 0;
     timeLeft = 30;
-    scoreDisplay.textContent = `Score: ${score}`;
-    timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
-    messageDisplay.textContent = '';
-    wordInput.value = '';
-    wordInput.disabled = false;
-    startButton.disabled = true;
-    generateWord();
-    startTimer();
+    document.getElementById('score').innerText = "Score: " + score;
+    document.getElementById('timer').innerText = "Time Left: " + timeLeft + " seconds";
+    document.getElementById('word-input').disabled = false;
+    document.getElementById('word-input').focus();
+    nextWord();
+    timer = setInterval(updateTimer, 1000);
 }
 
-function startTimer() {
-    timer = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Time Left: ${timeLeft} seconds`;
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            endGame();
-        }
-    }, 1000);
+function nextWord() {
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    document.getElementById('word-display').innerText = currentWord;
 }
 
-function generateWord() {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    currentWord = words[randomIndex];
-    wordDisplay.textContent = currentWord;
-}
-
-function checkInput() {
-    if (wordInput.value === currentWord) {
-        score++;
-        scoreDisplay.textContent = `Score: ${score}`;
-        wordInput.value = '';
-        generateWord();
+function updateTimer() {
+    timeLeft--;
+    document.getElementById('timer').innerText = "Time Left: " + timeLeft + " seconds";
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        endGame();
     }
 }
 
+document.getElementById('word-input').addEventListener('input', function() {
+    if (this.value === currentWord) {
+        score += 1; // Increment score by 1 for each correct word
+        document.getElementById('score').innerText = "Score: " + score;
+        this.value = '';
+        nextWord();
+    }
+});
+
 function endGame() {
-    wordInput.disabled = true;
-    startButton.disabled = false;
-    messageDisplay.textContent = `Game over! Your score is ${score}.`;
+    document.getElementById('word-input').disabled = true;
+    document.getElementById('message').innerText = "Game Over! Your score: " + score;
 }
 
-startButton.addEventListener('click', startGame);
-wordInput.addEventListener('input', checkInput);
+// New code for Jayces Idea™ button
+document.getElementById('jayces-idea-button').addEventListener('click', function() {
+    window.location.href = "https://bigqohio.github.io/JaycesIdeas.github.io/index2.html";
+});
