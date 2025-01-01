@@ -1,6 +1,6 @@
 // Existing code for speed typing challenge
 
-let words = ["example", "test", "challenge", "speed", "typing", "mango", "tornado", "volume", "vacuum", "tsunami", "natural", "paranormal", "corn"]; // Add your word list here
+let words = ["example", "test", "challenge", "speed", "typing", "mango", "cooking", "paranormal", "activity", "fitness", "bother", "matter", "forgot", "the", "born", "happy", "smile"]; // Add your word list here
 let currentWord;
 let score = 0;
 let timeLeft = 30;
